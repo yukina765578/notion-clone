@@ -35,8 +35,8 @@ export const Navbar = () => {
         )}
         {isAuthenticated && !isLoading && (
           <>
-            <Button variant="ghost" size="sm" asChild>
-              <Link href="/documents">Enter Notion Clone</Link>
+            <Button variant="outline" size="sm" asChild>
+              <Link href="/documents">Start Taking Notes</Link>
             </Button>
             <UserButton afterSignOutUrl="/" />
           </>
