@@ -9,7 +9,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { SignOutButton, useUser } from "@clerk/clerk-react";
-import { ChevronsLeftRight } from "lucide-react";
+import { ChevronsLeftRight, ChevronsLeft } from "lucide-react";
 
 export const UserItem = () => {
   const { user } = useUser();
@@ -19,17 +19,17 @@ export const UserItem = () => {
       <DropdownMenuTrigger asChild>
         <div
           role="button"
-          className="flex items-center text-sm p-3 hover:bg-primary/5 ml-2 mr-2 mb-2 mt-2 rounded-md"
+          className="flex items-center text-sm p-3 hover:bg-primary/5 ml-1 mr-1 mb-2 rounded-md pr-8"
         >
           <div className="gap-x-2 flex items-center">
             <Avatar className="h-5 w-5">
               <AvatarImage src={user?.imageUrl} />
             </Avatar>
             <span className="text-start font-medium line-clamp-1">
-              {user?.username}&apos;s Note
+              {user?.username}&apos;s Note taking
             </span>
           </div>
-          <ChevronsLeftRight className="rotate-90 ml-2 text-muted-foreground h-4 w-4 right-3 absolute" />
+          <ChevronsLeftRight className="rotate-90 ml-2 text-muted-foreground h-4 w-4" />
         </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent
