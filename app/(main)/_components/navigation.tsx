@@ -2,9 +2,11 @@
 
 import { cn } from "@/lib/utils";
 import {
+  Archive,
   ChevronsLeft,
   MenuIcon,
   PlusCircle,
+  PlusIcon,
   Search,
   Settings,
 } from "lucide-react";
@@ -18,8 +20,18 @@ import { api } from "@/convex/_generated/api";
 import { Item } from "./item";
 import { toast } from "sonner";
 import { DocumentList } from "./document-list";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { ArchiveBox } from "./archive-box";
+import { useSearch } from "@/hooks/use-search";
+import { useSettings } from "@/hooks/use-settings";
 
 export const Navigation = () => {
+  const settings = useSettings();
+  const search = useSearch();
   const pathname = usePathname();
   const isMobile = useMediaQuery("(max-width: 768px)");
   const documents = useQuery(api.documents.get);
@@ -156,12 +168,24 @@ export const Navigation = () => {
         </div>
         <div>
           <UserItem />
-          <Item lable="Search" icon={Search} isSearch onClick={() => {}} />
-          <Item lable="Settings" icon={Settings} onClick={() => {}} />
+          <Item lable="Search" icon={Search} isSearch onClick={search.onOpen} />
+          <Item lable="Settings" icon={Settings} onClick={settings.onOpen} />
           <Item onClick={handleCreate} lable="New Page" icon={PlusCircle} />
         </div>
         <div className="mt-4">
           <DocumentList />
+          <Item onClick={handleCreate} lable="Add a page" icon={PlusIcon} />
+          <Popover>
+            <PopoverTrigger className="w-full mt-4">
+              <Item lable="Archive" icon={Archive} />
+            </PopoverTrigger>
+            <PopoverContent
+              className="p-0 w-72"
+              side={isMobile ? "bottom" : "right"}
+            >
+              <ArchiveBox />
+            </PopoverContent>
+          </Popover>
         </div>
         <div
           onMouseDown={handleMouseDown}
